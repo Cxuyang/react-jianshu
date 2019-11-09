@@ -7,36 +7,39 @@ class TodoList extends Component {
       inputValue: '',
       list: []
     }
+    this.inputChange = this.inputChange.bind(this)
+    this.addList = this.addList.bind(this)
   }
   inputChange(e) {
-    this.setState({
-      inputValue: e.target.value
-    })
+    const inputValue = e.target.value
+    this.setState(() => ({
+      inputValue
+    }))
   }
   addList(e) {
-    this.setState({
-      list: [...this.state.list, this.state.inputValue],
+    this.setState((prevState) => ({
+      list: [...prevState.list, prevState.inputValue],
       inputValue: ''
-    })
+    }))
   }
   deleteItem(targetIndex) {
-    let _list = [...this.state.list]
-    _list.splice(targetIndex, 1)
-    this.setState({
-      list: _list
-    })
+    let list = [...this.state.list]
+    list.splice(targetIndex, 1)
+    this.setState(() => ({
+      list
+    }))
   }
   render () {
     return (
       <div>
-        <input value={this.state.inputValue} onChange={this.inputChange.bind(this)}></input>
-        <button onClick={this.addList.bind(this)}>addList</button>
+        <input value={this.state.inputValue} onChange={this.inputChange}></input>
+        <button onClick={this.addList}>addList</button>
         <ul>
           {this.state.list.map((item, index) => {
             return (
-              <div>
-                <li key={index}>{item}</li>
-                <button onClick={this.deleteItem.bind(this, index)} key={index}>删除</button>
+              <div key={index}>
+                <li>{item}</li>
+                <button onClick={this.deleteItem.bind(this, index)}>删除</button>
               </div>
             )
           })}
