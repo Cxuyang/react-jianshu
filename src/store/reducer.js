@@ -1,4 +1,4 @@
-import {CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM} from './actionsTypes'
+import {CHANGE_INPUT_VALUE, ADD_TODO_ITEM, DELETE_TODO_ITEM, INIT_TODO_LIST} from './actionsTypes'
 const defaultState = {
   inputValue: '',
   list: []
@@ -9,7 +9,7 @@ export const reducer = (state = defaultState, action) => {
   switch (action.type) {
     case CHANGE_INPUT_VALUE:
       newState.inputValue = action.value
-      break;
+      break; 
     case ADD_TODO_ITEM:
       newState.list.push(action.value)
       newState.inputValue = ''
@@ -17,9 +17,13 @@ export const reducer = (state = defaultState, action) => {
     case DELETE_TODO_ITEM:
       newState.list.splice(action.value, 1)
       break;
+    case INIT_TODO_LIST:
+      console.log(action)
+      newState.list = [...action.value]
+      break;
     default:
       break;
   }
-  console.log(newState)
+  console.log(action)
   return newState
 }
