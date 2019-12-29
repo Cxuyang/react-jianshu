@@ -1,9 +1,9 @@
 import React from 'react';
-import TodoList from './components/todolist';
+import Header from './common/header/index';
 function App() {
   return (
     <div className="App">
-      <TodoList></TodoList>
+      <Header></Header>
     </div>
   );
 }
